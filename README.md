@@ -144,4 +144,44 @@ After manually collecting the optimal steps, I plan to design a Terraform script
 
 - If the config file is set up as above, log in with `ssh udacity_grader`.
 
+## Application Functionality
+
+My Item Catalog submission involved a single docker container containing Python Flask + SQLite.
+(https://github.com/ericcgu/Udacity-Flask-Item-Catalog)
+
+In order to expand the functionality to add:
+
+* `Web Server` 
+* `WSGI`
+* `PostgreSQL`
+
+I needed to add containers. 
+
+I followed hundreds of breadcrumbs across the internet to get the right mix and structure:
+
+## IP Address
+
+165.227.182.114
+
+## URL
+
+http://165.227.182.114.xip.io/
+
+## Summary of Software
+
+* `Docker` 
+* `Python`
+* `Flask` 
+* `SQLAlchemy`
+* `Nginx`
+* `Gunicorn`
+* `PosgreSQL`
+
+## Third Party Resources
+
+(https://realpython.com/dockerizing-flask-with-compose-and-machine-from-localhost-to-the-cloud/)
+(https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04)
+(http://www.patricksoftwareblog.com/how-to-use-docker-and-docker-compose-to-create-a-flask-application/)
+
+
 [(Back to top)](#top)
