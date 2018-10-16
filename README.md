@@ -160,7 +160,7 @@ I added and orchestrated additional containers, keeping in line with the single 
 
 For example, it is possible to swap PostgreSQL with MySQL with a single line of code change.
 
-(https://github.com/ericcgu/Flask-Gunicorn-Postgres-Docker)
+(https://github.com/ericcgu/Flask-Gunicorn-Nginx-Postgres-Docker)
 
 ```bash
 .
