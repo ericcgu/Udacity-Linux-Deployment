@@ -147,6 +147,7 @@ After manually collecting the optimal steps, I plan to design a Terraform script
 ## Application Functionality
 
 My Item Catalog submission involved a single docker container containing Python Flask + SQLite.
+
 (https://github.com/ericcgu/Udacity-Flask-Item-Catalog)
 
 In order to expand the functionality to add:
@@ -155,9 +156,95 @@ In order to expand the functionality to add:
 * `WSGI`
 * `PostgreSQL`
 
-I needed to add containers. 
+I added and orchestrated additional containers, keeping in line with teh single responsibility, decoupling each piece of functionality.  
 
-I followed hundreds of breadcrumbs across the internet to get the right mix and structure:
+For example, I can swap PostgreSQL with MySQL with a single line of code change.
+
+![docker-application-architecture](https://user-images.githubusercontent.com/4943759/46992807-ea2b7f80-d0d9-11e8-8266-41b53e0aff04.png)
+
+* `Web Server = Nginx` 
+* `WSGI = Gunicorn`
+* `PostgreSQL`
+
+```bash
+.
+├── db
+├── web
+├── nginx
+├── postgres
+├── .env
+└── docker-compose.yml
+```
+
+
+```dockerfile
+FROM python:3.7.0-slim
+LABEL maintainer "Eric Gu <eric.changning.gu@gmail.com>"
+RUN apt-get update \
+    && apt-get upgrade -y \                                                 # I updated the docker file to increase security
+    && apt-get install -y \
+    && apt-get -y install apt-utils gunicorn libpq-dev python3-dev \
+    && apt-get autoremove -y \
+    && apt-get clean all
+ENV INSTALL_PATH /usr/app/static
+RUN mkdir -p $INSTALL_PATH
+WORKDIR $INSTALL_PATH
+COPY requirements.txt .
+RUN pip install --upgrade pip -r requirements.txt
+COPY . .
+
+CMD ["/web/entrypoint.sh"]
+```
+```yml
+version: '3.7'
+
+services:
+  postgres:
+    build: ./postgres
+    restart: always
+    volumes:
+      - ./db:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: 'master'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'temp'
+
+  web:
+    restart: always
+    build: ./web
+    environment:
+      ENV: "Development"
+      PYTHONUNBUFFERED: 1
+      PYTHONDONTWRITEBYTECODE: 1
+      OAUTHLIB_INSECURE_TRANSPORT: 1
+      OAUTHLIB_RELAX_TOKEN_SCOPE: 1
+    ports:
+      - "8000:8000"
+    expose:
+      - 8000
+    depends_on:
+      - postgres
+    links:
+      - postgres:postgres
+    volumes:
+      - .:/usr/src/app/static
+    env_file: .env
+    command: gunicorn -w 2 -b :8000 itemcatalog:app
+
+  nginx:
+    build: ./nginx
+    restart: always
+    volumes:
+      - /www/static
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+
+```
+Although it was not easy, the work paid off during deployment:
 
 ## IP Address
 
