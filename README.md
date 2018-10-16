@@ -256,7 +256,7 @@ production
 
 3. Run `eval "$(docker-machine env production)"`
 
-4. run `docker-compose up --build`
+4. Run `docker-compose up --build`
 
 ## IP Address
 
