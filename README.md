@@ -274,7 +274,7 @@ http://165.227.182.114.xip.io/
 * `SQLAlchemy`
 * `Nginx`
 * `Gunicorn`
-* `PosgreSQL`
+* `PostgreSQL`
 
 ## Third Party Resources
 
