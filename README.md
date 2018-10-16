@@ -244,7 +244,7 @@ services:
 
 To deploy this application configuration, there are four simple steps:
 
-1. Create an personal access token
+1. Create an Personal Access Token
 2. Create an instance of Docker Machine with personal access token
 
 ```bash
