@@ -240,7 +240,7 @@ services:
       - web
 
 ```
-## Deployment:
+## Deployment
 
 To deploy this application configuration, there was four simple steps:
 
