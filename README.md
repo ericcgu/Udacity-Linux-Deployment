@@ -156,15 +156,11 @@ In order to expand the functionality to add:
 * `WSGI`
 * `PostgreSQL`
 
-I added and orchestrated additional containers, keeping in line with teh single responsibility, decoupling each piece of functionality.  
+I added and orchestrated additional containers, keeping in line with the single responsibility principle, decoupling each piece of functionality.  
 
-For example, I can swap PostgreSQL with MySQL with a single line of code change.
+For example, it is possible to swap PostgreSQL with MySQL with a single line of code change.
 
-![docker-application-architecture](https://user-images.githubusercontent.com/4943759/46992807-ea2b7f80-d0d9-11e8-8266-41b53e0aff04.png)
-
-* `Web Server = Nginx` 
-* `WSGI = Gunicorn`
-* `PostgreSQL`
+(https://github.com/ericcgu/Flask-Gunicorn-Postgres-Docker)
 
 ```bash
 .
@@ -175,6 +171,8 @@ For example, I can swap PostgreSQL with MySQL with a single line of code change.
 ├── .env
 └── docker-compose.yml
 ```
+
+![docker-application-architecture](https://user-images.githubusercontent.com/4943759/46992807-ea2b7f80-d0d9-11e8-8266-41b53e0aff04.png)
 
 
 ```dockerfile
@@ -244,7 +242,22 @@ services:
       - web
 
 ```
-Although it was not easy, the work paid off during deployment:
+The work paid off during deployment:
+
+To deploy this complex application configuration, there was three simple steps:
+
+1. Create an personal access token
+2. Create an instance of Docker Machine with personal access token
+
+```bash
+ docker-machine create \
+-d digitalocean \
+--digitalocean-access-token=ADD_YOUR_TOKEN_HERE \
+production
+```
+3. Run `eval "$(docker-machine env production)"`
+
+4. run `docker-compose up --build`
 
 ## IP Address
 
