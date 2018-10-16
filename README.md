@@ -207,16 +207,14 @@ services:
     environment:
       POSTGRES_DB: 'master'
       POSTGRES_USER: 'postgres'
-      POSTGRES_PASSWORD: 'temp'
 
   web:
     restart: always
     build: ./web
     environment:
-      ENV: "Development"
+      ENV: "Production"
       PYTHONUNBUFFERED: 1
       PYTHONDONTWRITEBYTECODE: 1
-      OAUTHLIB_INSECURE_TRANSPORT: 1
       OAUTHLIB_RELAX_TOKEN_SCOPE: 1
     ports:
       - "8000:8000"
@@ -242,9 +240,9 @@ services:
       - web
 
 ```
-The work paid off during deployment:
+Deployment:
 
-To deploy this complex application configuration, there was three simple steps:
+To deploy this application configuration, there was four simple steps:
 
 1. Create an personal access token
 2. Create an instance of Docker Machine with personal access token
@@ -255,6 +253,7 @@ To deploy this complex application configuration, there was three simple steps:
 --digitalocean-access-token=ADD_YOUR_TOKEN_HERE \
 production
 ```
+
 3. Run `eval "$(docker-machine env production)"`
 
 4. run `docker-compose up --build`
