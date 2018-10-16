@@ -242,7 +242,7 @@ services:
 ```
 ## Deployment
 
-To deploy this application configuration, there was four simple steps:
+To deploy this application configuration, there are four simple steps:
 
 1. Create an personal access token
 2. Create an instance of Docker Machine with personal access token
@@ -261,6 +261,10 @@ production
 ## IP Address
 
 165.227.182.114
+
+## SSH Key
+
+Sent to inbox: [fullstack-project@udacity.com]
 
 ## URL
 
