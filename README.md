@@ -262,9 +262,10 @@ production
 
 165.227.182.114
 
-## SSH Key
+## INFO
 
-Sent to inbox: [fullstack-project@udacity.com]
+handle: grader
+password: Braver3300
 
 ## URL
 
